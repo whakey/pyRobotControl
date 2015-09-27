@@ -18,6 +18,8 @@ try:
         sock.sendall(bytes(data, "utf-8"))
         received = str(sock.recv(1024))
         print("Received: {}".format(received))
+        if (data == "exit"):
+            break
 
 finally:
     sock.close()

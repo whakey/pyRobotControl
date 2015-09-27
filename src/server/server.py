@@ -10,7 +10,8 @@ args = parser.parse_args()
 class MyTCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
-        while True:
+        self.data = self.request.recv(1024).strip()
+        while (self.data).decode("utf-8") != "exit":
             self.data = self.request.recv(1024).strip()
             print("{} wrote:".format(self.client_address[0]))
             print(self.data)
