@@ -2,7 +2,6 @@
 
 import argparse
 import socket
-import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument("ip")
