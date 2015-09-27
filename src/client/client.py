@@ -14,7 +14,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
     sock.connect((HOST, PORT))
-    sock.sendall("testdata")
+    sock.sendall(bytes("testdata"), "utf-8")
     received = str(sock.recv(1024))
 finally:
     sock.close()
