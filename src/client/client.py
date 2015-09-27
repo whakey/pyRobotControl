@@ -13,10 +13,12 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 try:
     sock.connect((HOST, PORT))
-    sock.sendall(bytes("testdata", "utf-8"))
-    received = str(sock.recv(1024))
+    while True:
+        data = input("Data to send\n")
+        sock.sendall(bytes(data, "utf-8"))
+        received = str(sock.recv(1024))
+        print("Received: {}".format(received))
+
 finally:
     sock.close()
-
-print("Received: {}".format(received))
 
