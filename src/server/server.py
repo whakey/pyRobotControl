@@ -12,7 +12,7 @@ args = parser.parse_args()
 class MyTCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
-        ser = serial.Serial('/dev/ttyACM1', 9600)
+        ser = serial.Serial('/dev/ttyACM0', 9600)
         self.data = self.request.recv(1024).strip()
         while self.data.decode("utf-8") != "exit" or self.data.decode("utf-8") != "":
             print("{} wrote:".format(self.client_address[0]))
