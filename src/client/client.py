@@ -18,12 +18,24 @@ try:
     device_numbers = list(map(attrgetter('device_number'), joysticks))
     j = joysticks[0]
 
+    @j.event
+    def on_axis(axis, value):
+        left_speed = 0
+        right_speed = 0
+
+        print('axis', axis, value)
+        if axis == "left_trigger":
+            left_speed = value
+        elif axis == "right_trigger":
+            right_speed = value
+        j.set_vibration(left_speed, right_speed)
+
     sock.connect((HOST, PORT))
     while True:
-        data = input("Data to send\n")
+        j.dispatch_events()
+        time.sleep(.01)
+        data = "mockdata"
         sock.sendall(bytes(data, "utf-8"))
-        received = str(sock.recv(1024))
-        print("Received: {}".format(received))
         if (data == "exit"):
             break
 
