@@ -13,11 +13,10 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
     def handle(self):
         ser = serial.Serial('/dev/ttyACM0', 9600)
-        self.data = self.request.recv(1024).strip()
+        self.data = self.request.recv(1024)
         while self.data.decode("utf-8") != "exit" or self.data.decode("utf-8") != "":
             print("{} wrote:".format(self.client_address[0]))
             print(self.data)
-            self.request.sendall(self.data.upper())
             self.data = self.request.recv(1024).strip()
             ser.write(bytes(str(self.data.decode("utf-8")), "utf-8"))
 
